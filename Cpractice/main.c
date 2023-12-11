@@ -1,55 +1,85 @@
+#include <stdio.h>
+#include <stdbool.h>
 #include <assert.h>
-#include "stack.h"
+#include "queue.h"
 
-int main() {
-    // 測試 createSTACK 和 destroyStack
-    STACK* stack = createSTACK();
-    assert(stack != NULL);
-    assert(isEmptyStack(stack));
-    assert(sizeOfStack(stack) == 0);
+// Define a test structure that includes a test function and a description
+typedef struct {
+    void (*testFunc)(void);
+    const char* description;
+} Test;
 
-    // 測試 pushStack
-    int data1 = 10;
-    int data2 = 20;
-    int data3 = 30;
+// Test function prototypes
+void test_create_enqueue_dequeue(void);
+void test_front_rear(void);
+void test_isEmpty_size(void);
 
-    assert(pushStack(stack, &data1));
-    assert(!isEmptyStack(stack));
-    assert(sizeOfStack(stack) == 1);
+// Test suite containing all test functions
+Test tests[] = {
+    {test_create_enqueue_dequeue, "Test create, enqueue, and dequeue functions"},
+    {test_front_rear, "Test front and rear functions"},
+    {test_isEmpty_size, "Test isEmptyQueue and sizeOfQueue functions"},
+    // Add more tests as needed
+    {NULL, NULL} // End marker
+};
 
-    assert(pushStack(stack, &data2));
-    assert(sizeOfStack(stack) == 2);
+// Main test function
+int main(void) {
+    for (int i = 0; tests[i].testFunc != NULL; ++i) {
+        printf("Running test: %s\n", tests[i].description);
+        tests[i].testFunc();
+        printf("Test passed!\n\n");
+    }
 
-    assert(pushStack(stack, &data3));
-    assert(sizeOfStack(stack) == 3);
-
-    // 測試 topStack
-    int* topData = (int*)topStack(stack);
-    assert(topData != NULL);
-    assert(*topData == data3);
-
-    // 測試 popStack
-    int* poppedData = (int*)popStack(stack);
-    assert(poppedData != NULL);
-    assert(*poppedData == data3);
-    assert(sizeOfStack(stack) == 2);
-
-    poppedData = (int*)popStack(stack);
-    assert(poppedData != NULL);
-    assert(*poppedData == data2);
-    assert(sizeOfStack(stack) == 1);
-
-    poppedData = (int*)popStack(stack);
-    assert(poppedData != NULL);
-    assert(*poppedData == data1);
-    assert(isEmptyStack(stack));
-
-    // 測試 topStack 空堆疊情況
-    assert(topStack(stack) == NULL);
-
-    // 釋放堆疊
-    destroyStack(&stack);
-    assert(stack == NULL);
+    printf("All tests passed successfully!\n");
 
     return 0;
+}
+
+// Actual test functions
+void test_create_enqueue_dequeue(void) {
+    QUEUE* myQueue = createQueue();
+    assert(myQueue != NULL);
+
+    int data1 = 42;
+    int data2 = 84;
+
+    assert(enQueue(myQueue, &data1));
+    assert(enQueue(myQueue, &data2));
+
+    int* dequeuedData;
+    assert(dequeue(myQueue, (void**)&dequeuedData) && *dequeuedData == data1);
+
+    destroyQueue(&myQueue);
+}
+
+void test_front_rear(void) {
+    QUEUE* myQueue = createQueue();
+    assert(myQueue != NULL);
+
+    int data1 = 42;
+
+    assert(enQueue(myQueue, &data1));
+
+    int* frontData;
+    assert(queueFront(myQueue, (void**)&frontData) && *frontData == data1);
+
+    int* rearData;
+    assert(queueRear(myQueue, (void**)&rearData) && *rearData == data1);
+
+    destroyQueue(&myQueue);
+}
+
+void test_isEmpty_size(void) {
+    QUEUE* myQueue = createQueue();
+    assert(myQueue != NULL);
+
+    assert(isEmptyQueue(myQueue) && sizeOfQueue(myQueue) == 0);
+
+    int data1 = 42;
+    assert(enQueue(myQueue, &data1));
+
+    assert(!isEmptyQueue(myQueue) && sizeOfQueue(myQueue) == 1);
+
+    destroyQueue(&myQueue);
 }

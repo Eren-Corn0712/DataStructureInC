@@ -2,6 +2,8 @@
 #ifndef STACK_H
 #define STACK_H
 #include<stdbool.h>
+
+/*forward declaration*/
 typedef struct stack STACK;
 typedef struct stack_node STACK_NODE;
 
@@ -20,6 +22,7 @@ STACK* createSTACK(void);
 bool pushStack(STACK* stack, void* dataInPtr);
 void* popStack(STACK* stack);
 void* topStack(STACK* stack);
+
 bool isEmptyStack(STACK* stack);
 int	sizeOfStack(STACK* stack);
 void destroyStack(STACK ** stackPtr);

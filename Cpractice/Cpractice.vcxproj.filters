@@ -18,6 +18,9 @@
     <ClInclude Include="stack.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="queue.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stack.c">
@@ -25,6 +28,9 @@
     </ClCompile>
     <ClCompile Include="main.c">
       <Filter>資源檔</Filter>
+    </ClCompile>
+    <ClCompile Include="queue.c">
+      <Filter>標頭檔</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
