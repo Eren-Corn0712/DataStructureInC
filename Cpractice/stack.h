@@ -18,6 +18,7 @@ struct stack_node {
 };
 
 STACK* createSTACK(void);
+void destroyStack(STACK** stackPtr);
 
 bool pushStack(STACK* stack, void* dataInPtr);
 void* popStack(STACK* stack);
@@ -25,6 +26,6 @@ void* topStack(STACK* stack);
 
 bool isEmptyStack(STACK* stack);
 int	sizeOfStack(STACK* stack);
-void destroyStack(STACK ** stackPtr);
+
 
 #endif // !STACK_H

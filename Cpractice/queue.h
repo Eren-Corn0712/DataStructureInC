@@ -4,14 +4,14 @@
 #include<stdbool.h>
 
 /*forward declaration*/
-typedef struct node QUEUE_NODE;
+typedef struct queue_node QUEUE_NODE;
 typedef struct queue QUEUE;
 
 /*Queue ADT Type Defintions*/
-struct node
+struct queue_node
 {
 	void* dataPtr;
-	struct node* next;
+	struct queue_node* next;
 };
 
 struct queue
@@ -20,8 +20,8 @@ struct queue
 	QUEUE_NODE* rear;
 	int size;
 };
-//Prototype Declarations
 
+//Prototype Declarations
 QUEUE* createQueue(void);
 void destroyQueue(QUEUE** queuePtr);
 

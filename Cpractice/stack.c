@@ -13,6 +13,18 @@ STACK* createSTACK(void)
 	return stack;
 }
 
+void destroyStack(STACK** stackPtr)
+{
+	if (stackPtr && *stackPtr) {
+		while (!isEmptyStack(*stackPtr)) {
+			popStack(*stackPtr);
+		}
+		free(*stackPtr);
+		*stackPtr = NULL;
+	}
+	return;
+}
+
 bool pushStack(STACK* stack, void* dataInPtr)
 {
 	STACK_NODE* newPtr = (STACK_NODE*)malloc(sizeof(STACK_NODE));
@@ -57,20 +69,7 @@ bool isEmptyStack(STACK* stack)
 
 int sizeOfStack(STACK* stack)
 {
-	return (stack ? stack->size : 0);
-}
-
-void destroyStack(STACK ** stackPtr)
-{
-	if (stackPtr && *stackPtr) {
-		while (!isEmptyStack(*stackPtr)) {
-			void* item;
-			item = popStack(*stackPtr);
-		}
-		free(*stackPtr);
-		*stackPtr = NULL; 
-	}
-	return;
+	return (stack != NULL ? stack->size : 0);
 }
 
 
