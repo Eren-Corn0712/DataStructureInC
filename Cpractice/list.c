@@ -1,73 +1,213 @@
 #include "list.h"
 #include<stdlib.h>
-LIST* createList(int(*compare)(void* argu1, void* argu2))
+
+List* createList(int(*compare)(void* argu1, void* argu2))
 {
-    LIST* list = (LIST*)malloc(sizeof(LIST));
-    if (list) {
-        list->pos = NULL;
-        list->head = NULL;
-        list->rear = NULL;
-        list->size = 0;
-        list->compare = compare;
-    }
-    return list;
+	List* list = (List*)malloc(sizeof(List));
+	if (list) {
+		list->pos = NULL;
+		list->head = NULL;
+		list->rear = NULL;
+		list->size = 0;
+		list->compare = compare;
+	}
+	return list;
 }
 
-LIST* destroyList(LIST* list)
+void destroyList(List ** ptrList)
 {
-    return nullptr;
+	if (ptrList && *ptrList) {
+		ListNode* deletePtr;
+		while (!isEmptyList(*ptrList)) {
+			deletePtr = (*ptrList)->head;
+			(*ptrList)->head = (*ptrList)->head->link;
+			((*ptrList)->size)--;
+			free(deletePtr);
+		}
+		free(*ptrList);
+		*ptrList = NULL;
+	}
 }
 
-int addNode(LIST* pList, void* dataInPtr)
+int addNode(List* pList, void* dataInPtr)
 {
-    return 0;
+	bool found;
+	bool success;
+
+	ListNode* pPre;
+	ListNode* pLoc;
+
+	found = _search(pList, &pPre, &pLoc, dataInPtr);
+	if (found) {
+		return (1);
+	}
+	success = _insert(pList, pPre, dataInPtr);
+	if (!success) {
+		return (-1);
+	}
+	return (0);
 }
 
-bool removeNode(LIST* pList, void* keyPtr, void** dataOutPtr)
+bool removeNode(List* pList, void* keyPtr, void** dataOutPtr)
 {
-    return false;
+	bool found;
+
+	ListNode* pPre;
+	ListNode* pLoc;
+
+	found = _search(pList, &pPre, &pLoc, keyPtr);
+	if (found) {
+		_delete(pList, pPre, pLoc, dataOutPtr);
+	}
+	return found;
 }
 
-bool searchList(LIST* pList, void* pArgu, void** pDataOut)
+bool searchList(List* pList, void* pArgu, void** pDataOut)
 {
-    return false;
+	bool found;
+	ListNode* pPre;
+	ListNode* pLoc;
+	found = _search(pList, &pPre, &pLoc, pArgu);
+	if (found) {
+		*pDataOut = pLoc->dataPtr;
+	}
+	else {
+		*pDataOut = NULL;
+	}
+	return found;
 }
 
-bool retrieveNode(LIST* pList, void* pArgu, void** dataOutPtr)
+bool retrieveNode(List* pList, void* pArgu, void** dataOutPtr)
 {
-    return false;
+	bool found;
+	ListNode* pPre;
+	ListNode* pLoc;
+
+	found = _search(pList, &pPre, &pLoc, pArgu);
+	if (found)
+	{
+		*dataOutPtr = pLoc->dataPtr;
+		return true;
+	} // if 
+	*dataOutPtr = NULL;
+	return false;
 }
 
-bool traverse(LIST* pList, int fromWhere, void** dataOutPtr)
+bool traverse(List* pList, int fromWhere, void** dataOutPtr)
 {
-    return false;
+	if (isEmptyList(pList)) {
+		return false;
+	}
+	if (fromWhere == 0) {
+		pList->pos = pList->head;
+		*dataOutPtr = pList->pos->dataPtr;
+		return true;
+	}
+	else {
+		if (pList->pos->link == NULL) {
+			return false;
+		}
+		else {
+			pList->pos = pList->pos->link;
+			*dataOutPtr = pList->pos->dataPtr;
+			return true;
+		}
+	}
 }
 
-int sizeOfList(LIST* pList)
+int sizeOfList(List* pList)
 {
-    return 0;
+	return (pList ? pList->size : 0);
 }
 
-bool isEmptyList(LIST* pList)
+bool isEmptyList(List* pList)
 {
-    return false;
+	return (pList == NULL || pList->size == 0);
 }
 
-bool isFullList(LIST* pList)
+bool isFullList(List* pList)
 {
-    return false;
+	ListNode* temp = (ListNode*)malloc(sizeof(*(pList->head)));
+	if (temp) {
+		free(temp);
+		return false;
+	}
+	return true;
 }
 
-int _insert(LIST* pList, LIST_NODE* pPre, void* dataInPtr)
+bool _insert(List* pList, ListNode* pPre, void* dataInPtr)
 {
-    return 0;
+	ListNode* pNew = (ListNode*)malloc(sizeof(ListNode));
+
+	if (pList == NULL || !pNew) {
+		return false;
+	}
+
+	pNew->dataPtr = dataInPtr;
+	pNew->link = NULL;
+
+	if (pPre == NULL) {
+		pNew->link = pList->head;
+		pList->head = pNew;
+		if (pList->size == 0) {
+			pList->rear = pNew;
+		}
+	}
+	else {
+		pNew->link = pPre->link;
+		pPre->link = pNew;
+		if (pNew->link == NULL) {
+			pList->rear = pNew;
+		}
+	}
+	(pList->size)++;
+	return true;
 }
 
-void _delete(LIST* pList, LIST_NODE* pPre, LIST_NODE* pLoc, void** dataOutPtr)
+void _delete(List* pList, ListNode* pPre, ListNode* pLoc, void** dataOutPtr)
 {
+	*dataOutPtr = pLoc;
+	if (pPre == NULL) {
+		pList->head = pLoc->link;
+	}
+	else {
+		pPre->link = pLoc->link;
+	}
+
+	if (pLoc->link == NULL) {
+		pList->rear = pPre;
+	}
+	(pList->size)--;
+	free(pLoc);
+	return;
 }
 
-bool _search(LIST* pList, LIST_NODE** pPre, LIST_NODE** pLoc, void* pArgu)
+bool _search(List* pList, ListNode** pPre, ListNode** pLoc, void* pArgu)
 {
-    return false;
+#define COMPARE \
+( ((* pList->compare) (pArgu, (*pLoc)->dataPtr)) )
+#define COMPARE_LAST \
+((* pList->compare) (pArgu, pList->rear->dataPtr))
+	
+	int result;
+	*pPre = NULL;
+	*pLoc = pList->head;
+	
+	if (isEmptyList(pList)) {
+		return false;
+	}
+	if (COMPARE_LAST > 0) {
+		*pPre = pList->rear;
+		*pLoc = NULL;
+		return false;
+	}
+	while ((result = COMPARE) > 0)
+	{
+		*pPre = *pLoc;
+		*pLoc = (*pLoc)->link;
+	}
+	if (result == 0) {
+		return true;
+	}
+	return false;
 }

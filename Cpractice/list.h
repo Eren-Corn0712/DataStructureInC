@@ -4,8 +4,8 @@
 #define LIST_H
 
 /*forward declaration*/
-typedef struct list_node LIST_NODE;
-typedef struct list LIST;
+typedef struct list_node ListNode;
+typedef struct list List;
 
 /*List ADT Type Defintions*/
 struct list_node
@@ -16,28 +16,28 @@ struct list_node
 
 struct list
 {
-	LIST_NODE* pos;
-	LIST_NODE* head;
-	LIST_NODE* rear;
+	ListNode* pos;
+	ListNode* head;
+	ListNode* rear;
 	int size;
 	int (*compare)(void* argu1, void* argu2);
 };
 
 //Prototype Declarations 
-LIST* createList(int (*compare)(void* argu1, void* argu2));
-LIST* destroyList(LIST* list);
-int addNode(LIST* pList, void* dataInPtr);
-bool removeNode(LIST* pList, void* keyPtr, void** dataOutPtr);
-bool searchList(LIST* pList, void* pArgu, void** pDataOut);
+List* createList(int (*compare)(void* argu1, void* argu2));
+void destroyList(List ** ptrList);
+int addNode(List* pList, void* dataInPtr);
+bool removeNode(List* pList, void* keyPtr, void** dataOutPtr);
+bool searchList(List* pList, void* pArgu, void** pDataOut);
 
-bool retrieveNode(LIST* pList, void* pArgu, void** dataOutPtr);
-bool traverse(LIST* pList, int fromWhere, void** dataOutPtr);
-int sizeOfList(LIST* pList);
-bool isEmptyList(LIST* pList);
-bool isFullList(LIST* pList);
+bool retrieveNode(List* pList, void* pArgu, void** dataOutPtr);
+bool traverse(List* pList, int fromWhere, void** dataOutPtr);
+int sizeOfList(List* pList);
+bool isEmptyList(List* pList);
+bool isFullList(List* pList);
 
-static int _insert(LIST* pList, LIST_NODE* pPre, void* dataInPtr);
-static void _delete(LIST* pList, LIST_NODE* pPre, LIST_NODE* pLoc, void** dataOutPtr);
-static bool _search(LIST* pList, LIST_NODE** pPre, LIST_NODE** pLoc, void* pArgu);
+static bool _insert(List* pList, ListNode* pPre, void* dataInPtr);
+static void _delete(List* pList, ListNode* pPre, ListNode* pLoc, void** dataOutPtr);
+static bool _search(List* pList, ListNode** pPre, ListNode** pLoc, void* pArgu);
 //End of List ADT Definitions
 #endif // !LIST_H

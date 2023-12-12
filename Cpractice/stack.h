@@ -3,29 +3,32 @@
 #define STACK_H
 #include<stdbool.h>
 
-/*forward declaration*/
-typedef struct stack STACK;
-typedef struct stack_node STACK_NODE;
+// Forward declaration
+typedef struct stack Stack;
+typedef struct stack_node StackNode;
 
+// Definition of stack structure 
 struct stack {
-	int size;
-	STACK_NODE* top;
+    StackNode* top;  // Pointer to the top node of the stack
+    int size;         // Current size of the stack
 };
 
+// Queue ADT Type Definitions
 struct stack_node {
-	void* data;
-	STACK_NODE* link;
+    void* data;            // Pointer to the data stored in the node
+    StackNode* link;      // Pointer to the next node in the stack
 };
 
-STACK* createSTACK(void);
-void destroyStack(STACK** stackPtr);
+// Prototype Declarations
 
-bool pushStack(STACK* stack, void* dataInPtr);
-void* popStack(STACK* stack);
-void* topStack(STACK* stack);
+Stack* createStack(void);
+void destroyStack(Stack** stackPtr);
 
-bool isEmptyStack(STACK* stack);
-int	sizeOfStack(STACK* stack);
+bool pushStack(Stack* stack, void* dataInPtr);
+void* popStack(Stack* stack);
+void* topStack(Stack* stack);
 
+bool isEmptyStack(Stack* stack);
+int	sizeOfStack(Stack* stack);
 
 #endif // !STACK_H

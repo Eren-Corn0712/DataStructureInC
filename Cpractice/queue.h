@@ -3,35 +3,36 @@
 #define QUEUE_H
 #include<stdbool.h>
 
-/*forward declaration*/
-typedef struct queue_node QUEUE_NODE;
-typedef struct queue QUEUE;
+// Forward declaration
+typedef struct queue_node QueueNode;
+typedef struct queue Queue;
 
-/*Queue ADT Type Defintions*/
+
+// Queue ADT Type Definitions
 struct queue_node
 {
-	void* dataPtr;
-	struct queue_node* next;
+    void* dataPtr;
+    struct queue_node* next;
 };
 
 struct queue
 {
-	QUEUE_NODE* front;
-	QUEUE_NODE* rear;
-	int size;
+    QueueNode* front;
+    QueueNode* rear;
+    int size;
 };
 
-//Prototype Declarations
-QUEUE* createQueue(void);
-void destroyQueue(QUEUE** queuePtr);
+// Prototype Declarations
+Queue* createQueue(void);
+void destroyQueue(Queue** queuePtr);
 
-bool enQueue(QUEUE* queue, void* itemPtr);
-bool dequeue(QUEUE* queue, void** itemPtr);
-bool queueFront(QUEUE* queue, void** itemPtr);
-bool queueRear(QUEUE* queue, void** itemPtr);
+bool enQueue(Queue* queue, void* itemPtr);
+bool dequeue(Queue* queue, void** itemPtr);
+bool queueFront(Queue* queue, void** itemPtr);
+bool queueRear(Queue* queue, void** itemPtr);
 
-bool fullQueue(QUEUE* queue);
-bool isEmptyQueue(QUEUE* queue);
-int sizeOfQueue(QUEUE* queue);
+bool fullQueue(Queue* queue);
+bool isEmptyQueue(Queue* queue);
+int sizeOfQueue(Queue* queue);
 
 #endif // !QUEUE_H

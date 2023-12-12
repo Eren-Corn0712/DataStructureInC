@@ -24,11 +24,17 @@
     <ClInclude Include="list.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="cuTest.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="testStack.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="testQueue.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
-      <Filter>資源檔</Filter>
-    </ClCompile>
     <ClCompile Include="list.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
@@ -36,6 +42,18 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="stack.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="cuTest.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="testStack.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="testQueue.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

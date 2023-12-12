@@ -3,9 +3,15 @@
 #include<stdio.h>
 #include<stdbool.h> 
 
-STACK* createSTACK(void)
+/*
+    Description: Creates a new stack and allocates memory for it.
+
+    Returns:
+        - A pointer to the newly created stack, or NULL if memory allocation fails.
+*/
+Stack* createStack(void)
 {
-	STACK* stack = (STACK*)malloc(sizeof(STACK));
+	Stack* stack = (Stack*)malloc(sizeof(Stack));
 	if (stack) {
 		stack->size = 0;
 		stack->top = NULL;
@@ -13,7 +19,13 @@ STACK* createSTACK(void)
 	return stack;
 }
 
-void destroyStack(STACK** stackPtr)
+/*
+	Description: Deallocates the resources occupied by the stack and sets the pointer to NULL.
+
+	Parameters:
+		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.
+*/
+void destroyStack(Stack** stackPtr)
 {
 	if (stackPtr && *stackPtr) {
 		while (!isEmptyStack(*stackPtr)) {
@@ -25,9 +37,15 @@ void destroyStack(STACK** stackPtr)
 	return;
 }
 
-bool pushStack(STACK* stack, void* dataInPtr)
+/*
+	Description: Deallocates the resources occupied by the stack and sets the pointer to NULL.
+
+	Parameters:
+		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.
+*/
+bool pushStack(Stack* stack, void* dataInPtr)
 {
-	STACK_NODE* newPtr = (STACK_NODE*)malloc(sizeof(STACK_NODE));
+	StackNode* newPtr = (StackNode*)malloc(sizeof(StackNode));
 	if (!stack || !newPtr) {
 		return false;
 	}
@@ -39,13 +57,22 @@ bool pushStack(STACK* stack, void* dataInPtr)
 	return true;
 }
 
-void* popStack(STACK* stack)
+/*
+	Description: Removes and returns the top element from the stack.
+
+	Parameters:
+		- stack: Pointer to the stack from which the element will be popped.
+
+	Returns:
+		- A pointer to the data of the popped element, or NULL if the stack is empty.
+*/
+void* popStack(Stack* stack)
 {
 	if (isEmptyStack(stack)) {
 		return NULL;
 	}
 	void* dataOutPtr = NULL;
-	STACK_NODE* temp = stack->top;
+	StackNode* temp = stack->top;
 
 	dataOutPtr = stack->top->data;
 	stack->top = stack->top->link;
@@ -54,7 +81,16 @@ void* popStack(STACK* stack)
 	return dataOutPtr;
 }
 
-void* topStack(STACK* stack)
+/*
+	Description: Returns the data of the element at the top of the stack without removing it.
+
+	Parameters:
+		- stack: Pointer to the stack for which the top element's data will be retrieved.
+
+	Returns:
+		- A pointer to the data of the top element, or NULL if the stack is empty.
+*/
+void* topStack(Stack* stack)
 {
 	if (isEmptyStack(stack)) {
 		return NULL;
@@ -62,12 +98,31 @@ void* topStack(STACK* stack)
 	return stack->top->data;
 }
 
-bool isEmptyStack(STACK* stack)
+/*
+	Description: Checks if the stack is empty.
+
+	Parameters:
+		- stack: Pointer to the stack to be checked.
+
+	Returns:
+		- true if the stack is empty or NULL, false otherwise.
+*/
+bool isEmptyStack(Stack* stack)
 {
 	return  (stack == NULL || stack->size == 0);
 }
 
-int sizeOfStack(STACK* stack)
+
+/*
+	Description: Returns the current size of the stack.
+
+	Parameters:
+		- stack: Pointer to the stack for which the size will be retrieved.
+
+	Returns:
+		- The current size of the stack, or 0 if the stack is NULL.
+*/
+int sizeOfStack(Stack* stack)
 {
 	return (stack != NULL ? stack->size : 0);
 }

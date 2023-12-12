@@ -3,9 +3,18 @@
 #include<stdbool.h>
 #include "queue.h"
 
-QUEUE* createQueue(void)
+/*
+	Description: Creates a new empty queue.
+
+	Parameters:
+		- None
+
+	Returns:
+		- A pointer to the newly created Queue struct. Returns NULL if memory allocation fails.
+*/
+Queue* createQueue(void)
 {
-	QUEUE* queue = (QUEUE*)malloc(sizeof(QUEUE));
+	Queue* queue = (Queue*)malloc(sizeof(Queue));
 	if (queue) {
 		queue->front = NULL;
 		queue->rear = NULL;
@@ -14,7 +23,16 @@ QUEUE* createQueue(void)
 	return queue;
 }
 
-void destroyQueue(QUEUE** queuePtr)
+/*
+	Description: Destroys the queue, freeing allocated memory.
+
+	Parameters:
+		- queuePtr: A pointer to a pointer to the Queue struct.
+
+	Returns:
+		- None
+*/
+void destroyQueue(Queue** queuePtr)
 {
 	if (queuePtr&& *queuePtr) {
 		while (!isEmptyQueue(*queuePtr))
@@ -28,9 +46,19 @@ void destroyQueue(QUEUE** queuePtr)
 	return;
 }
 
-bool enQueue(QUEUE* queue, void* itemPtr)
+/*
+	Description: Enqueues an item to the rear of the queue.
+
+	Parameters:
+		- queue: A pointer to the Queue struct.
+		- itemPtr: A pointer to the data to be enqueued.
+
+	Returns:
+		- true if the item is enqueued successfully, false if memory allocation fails.
+*/
+bool enQueue(Queue* queue, void* itemPtr)
 {
-	QUEUE_NODE* newPtr = (QUEUE_NODE*)malloc(sizeof(QUEUE_NODE));
+	QueueNode* newPtr = (QueueNode*)malloc(sizeof(QueueNode));
 
 	if (!queue || !newPtr) {
 		return false;
@@ -49,9 +77,19 @@ bool enQueue(QUEUE* queue, void* itemPtr)
 	return true;
 }
 
-bool dequeue(QUEUE* queue, void** itemPtr)
+/*
+	Description: Dequeues an item from the front of the queue.
+
+	Parameters:
+		- queue: A pointer to the Queue struct.
+		- itemPtr: A pointer to store the dequeued item.
+
+	Returns:
+		- true if an item is dequeued successfully, false if the queue is empty.
+*/
+bool dequeue(Queue* queue, void** itemPtr)
 {
-	QUEUE_NODE* deleteLoc;
+	QueueNode* deleteLoc;
 	if (isEmptyQueue(queue)) {
 		return false;
 	}
@@ -69,7 +107,17 @@ bool dequeue(QUEUE* queue, void** itemPtr)
 	return true;
 }
 
-bool queueFront(QUEUE* queue, void** itemPtr)
+/*
+	Description: Retrieves the item at the front of the queue without removing it.
+
+	Parameters:
+		- queue: A pointer to the Queue struct.
+		- itemPtr: A pointer to store the retrieved item.
+
+	Returns:
+		- true if successful, false if the queue is empty.
+*/
+bool queueFront(Queue* queue, void** itemPtr)
 {
 	if (isEmptyQueue(queue)) {
 		return false;
@@ -78,7 +126,17 @@ bool queueFront(QUEUE* queue, void** itemPtr)
 	return true;
 }
 
-bool queueRear(QUEUE* queue, void** itemPtr)
+/*
+	Description: Retrieves the item at the rear of the queue without removing it.
+
+	Parameters:
+		- queue: A pointer to the Queue struct.
+		- itemPtr: A pointer to store the retrieved item.
+
+	Returns:
+		- true if successful, false if the queue is empty.
+*/
+bool queueRear(Queue* queue, void** itemPtr)
 {
 	if (isEmptyQueue(queue)) {
 		return false;
@@ -87,22 +145,40 @@ bool queueRear(QUEUE* queue, void** itemPtr)
 	return true;
 }
 
-bool fullQueue(QUEUE* queue)
+bool fullQueue(Queue* queue)
 {
-	QUEUE_NODE* temp = (QUEUE_NODE*)malloc(sizeof(QUEUE_NODE));
+	QueueNode* temp = (QueueNode*)malloc(sizeof(QueueNode));
 	if (temp) {
 		free(temp);
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }
 
-bool isEmptyQueue(QUEUE* queue)
+/*
+	Description: Checks if the queue is empty.
+
+	Parameters:
+		- queue: A pointer to the Queue struct.
+
+	Returns:
+		- true if the queue is empty (NULL or size is 0), false otherwise.
+*/
+bool isEmptyQueue(Queue* queue)
 {
 	return (queue == NULL || queue->size == 0);
 }
 
-int sizeOfQueue(QUEUE* queue)
+/*
+	Description: Retrieves the current size of the queue.
+
+	Parameters:
+		- queue: A pointer to the Queue struct.
+
+	Returns:
+		- The size of the queue. Returns 0 if the queue is NULL.
+*/
+int sizeOfQueue(Queue* queue)
 {
-	return queue ? queue->size : 0;
+	return (queue != NULL ? queue->size : 0);
 }
