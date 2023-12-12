@@ -104,5 +104,5 @@ bool isEmptyQueue(QUEUE* queue)
 
 int sizeOfQueue(QUEUE* queue)
 {
-	return queue ? queue->size : 0;
+	return (queue ? queue->size : 0);
 }

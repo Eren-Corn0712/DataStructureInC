@@ -25,7 +25,7 @@ struct list
 
 //Prototype Declarations 
 LIST* createList(int (*compare)(void* argu1, void* argu2));
-LIST* destroyList(LIST* list);
+void destroyList(LIST ** ptrList);
 int addNode(LIST* pList, void* dataInPtr);
 bool removeNode(LIST* pList, void* keyPtr, void** dataOutPtr);
 bool searchList(LIST* pList, void* pArgu, void** pDataOut);
@@ -36,7 +36,7 @@ int sizeOfList(LIST* pList);
 bool isEmptyList(LIST* pList);
 bool isFullList(LIST* pList);
 
-static int _insert(LIST* pList, LIST_NODE* pPre, void* dataInPtr);
+static bool _insert(LIST* pList, LIST_NODE* pPre, void* dataInPtr);
 static void _delete(LIST* pList, LIST_NODE* pPre, LIST_NODE* pLoc, void** dataOutPtr);
 static bool _search(LIST* pList, LIST_NODE** pPre, LIST_NODE** pLoc, void* pArgu);
 //End of List ADT Definitions

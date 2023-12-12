@@ -8,8 +8,8 @@ typedef struct stack STACK;
 typedef struct stack_node STACK_NODE;
 
 struct stack {
-	int size;
 	STACK_NODE* top;
+	int size;
 };
 
 struct stack_node {
