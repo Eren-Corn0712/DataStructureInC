@@ -9,8 +9,8 @@ typedef struct stack_node StackNode;
 
 // Definition of stack structure 
 struct stack {
-    StackNode* top;  // Pointer to the top node of the stack
-    int size;         // Current size of the stack
+	STACK_NODE* top;
+	int size;
 };
 
 // Queue ADT Type Definitions
