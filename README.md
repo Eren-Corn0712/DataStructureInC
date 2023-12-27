@@ -31,10 +31,47 @@ The queue is implemented using a linked list, where each node contains a pointer
 
 ### Usage
 #### Creating a Queue
-```
+```c
 Queue* myQueue = createQueue();
 ```
 
+#### Enqueuing Elements
+```c
+int element = 42;
+enQueue(myQueue, &element);
+```
+
+#### Dequeuing Elements
+```c
+int element = 42;
+enQueue(myQueue, &element);
+```
+
+#### Getting the Front and Rear Elements
+```c
+int* frontElement = (int*)queueFront(myQueue);
+int* rearElement = (int*)queueRear(myQueue);
+```
+
+#### Checking if the Queue is Full or Empty
+```c
+if (fullQueue(myQueue)) {
+    // Queue is full
+}
+
+if (isEmptyQueue(myQueue)) {
+    // Queue is empty
+}
+```
+#### Getting the Size of the Queue
+```c
+int queueSize = sizeOfQueue(myQueue);
+```
+
+#### Destroying the Queue
+```c
+destroyQueue(&myQueue);
+```
 
 ## Pair
 
