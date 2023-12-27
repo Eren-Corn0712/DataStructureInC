@@ -21,9 +21,6 @@
     <ClInclude Include="queue.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="cuTest.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
@@ -35,9 +32,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="list.c">
-      <Filter>來源檔案</Filter>
-    </ClCompile>
     <ClCompile Include="queue.c">
       <Filter>來源檔案</Filter>
     </ClCompile>

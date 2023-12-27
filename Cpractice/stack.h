@@ -9,7 +9,7 @@ typedef struct stack_node StackNode;
 
 // Definition of stack structure 
 struct stack {
-	STACK_NODE* top;
+	StackNode* top;
 	int size;
 };
 

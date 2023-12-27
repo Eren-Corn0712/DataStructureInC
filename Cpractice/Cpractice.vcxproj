@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cuTest.h" />
-    <ClInclude Include="list.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="testQueue.h" />
@@ -28,7 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cuTest.c" />
-    <ClCompile Include="list.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="queue.c" />
     <ClCompile Include="stack.c" />

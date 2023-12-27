@@ -24,11 +24,11 @@ struct list
 };
 
 //Prototype Declarations 
-LIST* createList(int (*compare)(void* argu1, void* argu2));
-LIST* destroyList(LIST* list);
-int addNode(LIST* pList, void* dataInPtr);
-bool removeNode(LIST* pList, void* keyPtr, void** dataOutPtr);
-bool searchList(LIST* pList, void* pArgu, void** pDataOut);
+List* createList(int (*compare)(void* argu1, void* argu2));
+List* destroyList(LIST* list);
+int addNode(List* pList, void* dataInPtr);
+bool removeNode(List* pList, void* keyPtr, void** dataOutPtr);
+bool searchList(List* pList, void* pArgu, void** pDataOut);
 
 bool retrieveNode(List* pList, void* pArgu, void** dataOutPtr);
 bool traverse(List* pList, int fromWhere, void** dataOutPtr);
@@ -36,8 +36,8 @@ int sizeOfList(List* pList);
 bool isEmptyList(List* pList);
 bool isFullList(List* pList);
 
-static int _insert(LIST* pList, LIST_NODE* pPre, void* dataInPtr);
-static void _delete(LIST* pList, LIST_NODE* pPre, LIST_NODE* pLoc, void** dataOutPtr);
-static bool _search(LIST* pList, LIST_NODE** pPre, LIST_NODE** pLoc, void* pArgu);
+static int _insert(List* pList, ListNode* pPre, void* dataInPtr);
+static void _delete(List* pList, ListNode* pPre, ListNode* pLoc, void** dataOutPtr);
+static bool _search(List* pList, ListNode** pPre, ListNode** pLoc, void* pArgu);
 //End of List ADT Definitions
 #endif // !LIST_H

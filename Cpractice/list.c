@@ -1,8 +1,8 @@
 #include "list.h"
 #include<stdlib.h>
-LIST* createList(int(*compare)(void* argu1, void* argu2))
+List* createList(int(*compare)(void* argu1, void* argu2))
 {
-    LIST* list = (LIST*)malloc(sizeof(LIST));
+    List* list = (List*)malloc(sizeof(List));
     if (list) {
         list->pos = NULL;
         list->head = NULL;
@@ -13,7 +13,7 @@ LIST* createList(int(*compare)(void* argu1, void* argu2))
     return list;
 }
 
-LIST* destroyList(LIST* list)
+List* destroyList(List* list)
 {
     return nullptr;
 }
@@ -58,7 +58,7 @@ bool _insert(List* pList, ListNode* pPre, void* dataInPtr)
     return false;
 }
 
-int _insert(LIST* pList, LIST_NODE* pPre, void* dataInPtr)
+int _insert(List* pList, ListNode* pPre, void* dataInPtr)
 {
     return 0;
 }
