@@ -25,7 +25,6 @@ int stackSize = sizeOfStack(myStack);
 freeStack(&myStack);
 ```
 
-
 ## Queue
 The queue is implemented using a linked list, where each node contains a pointer to the data and a link to the next node. The Queue structure maintains pointers to the front and rear of the queue and keeps track of the size.
 
