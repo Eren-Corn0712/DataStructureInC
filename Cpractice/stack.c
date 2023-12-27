@@ -25,7 +25,7 @@ Stack* createStack(void)
 	Parameters:
 		- stackPtr: Double pointer to the stack, pointing to the pointer to the stack.
 */
-void destroyStack(Stack** stackPtr)
+void freeStack(Stack** stackPtr)
 {
 	if (stackPtr && *stackPtr) {
 		while (!isEmptyStack(*stackPtr)) {

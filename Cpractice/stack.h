@@ -20,9 +20,8 @@ struct stack_node {
 };
 
 // Prototype Declarations
-
 Stack* createStack(void);
-void destroyStack(Stack** stackPtr);
+void freeStack(Stack** stackPtr);
 
 bool pushStack(Stack* stack, void* dataInPtr);
 void* popStack(Stack* stack);

@@ -16,7 +16,7 @@ void TestCreateDestroyStack(CuTest* tc)
     CuAssertTrue(tc, isEmptyStack(stack));
     CuAssertIntEquals(tc, 0, sizeOfStack(stack));
 
-    destroyStack(&stack);
+    freeStack(&stack);
     CuAssertPtrEquals(tc, NULL, stack);
 }
 
@@ -40,7 +40,7 @@ void TestPushPopStack(CuTest* tc)
     poppedData = popStack(stack);
     CuAssertIntEquals(tc, a, *(int*)poppedData);
     CuAssertIntEquals(tc, 0, sizeOfStack(stack));
-    destroyStack(&stack);
+    freeStack(&stack);
 }
 
 

@@ -3,6 +3,7 @@
 
 #include"testStack.h"
 #include"testQueue.h"
+#include"testPair.h"
 #include"cuTest.h"
 
 void RunAllTests(void) {
@@ -11,6 +12,7 @@ void RunAllTests(void) {
     CuSuite* suite = CuSuiteNew();
     CuSuiteAddSuite(suite, TestStack());
     CuSuiteAddSuite(suite, TestQueue());
+    CuSuiteAddSuite(suite, TestPair());
 
     // Run the tests
     CuSuiteRun(suite);

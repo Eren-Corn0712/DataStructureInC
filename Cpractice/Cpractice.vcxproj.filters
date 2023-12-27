@@ -30,6 +30,12 @@
     <ClInclude Include="testQueue.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="pair.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="testPair.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="queue.c">
@@ -48,6 +54,12 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="testQueue.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="pair.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="testPair.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

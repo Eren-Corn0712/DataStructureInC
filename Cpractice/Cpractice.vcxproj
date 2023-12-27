@@ -20,16 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cuTest.h" />
+    <ClInclude Include="pair.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="testPair.h" />
     <ClInclude Include="testQueue.h" />
     <ClInclude Include="testStack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cuTest.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="pair.c" />
     <ClCompile Include="queue.c" />
     <ClCompile Include="stack.c" />
+    <ClCompile Include="testPair.c" />
     <ClCompile Include="testQueue.c" />
     <ClCompile Include="testStack.c" />
   </ItemGroup>
