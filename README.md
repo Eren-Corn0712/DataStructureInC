@@ -13,9 +13,9 @@ Testing Framework:
 
 ## STACK
 This is a simple implementation of a stack data structure in C. The stack allows you to push and pop elements, check if it's empty, get its size, and more.
+The stack is implemented using a linked list, where each node holds a pointer to the data and a link to the next node. The `Stack` structure maintains a pointer to the top of the stack and keeps track of the size.
 
-### 實作
-以下為stack使用範例
+### Usage
 ```c
 Stack* myStack = createStack();
 int element = 42;
@@ -27,16 +27,16 @@ freeStack(&myStack);
 
 
 ## Queue
-在這裡簡要描述你實作的Queue資料結構。
+The queue is implemented using a linked list, where each node contains a pointer to the data and a link to the next node. The Queue structure maintains pointers to the front and rear of the queue and keeps track of the size.
 
-### 實作
-以下為queue使用範例
+### Usage
+#### Creating a Queue
 ```
+Queue* myQueue = createQueue();
 ```
 
 
 ## Pair
-在這裡簡要描述你實作的Pair資料結構。
 
 ### 實作
 以下為pair使用範例
