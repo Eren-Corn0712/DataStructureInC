@@ -73,10 +73,38 @@ destroyQueue(&myQueue);
 ```
 
 ## Pair
+The Pair structure consists of two pointers, first and second, to hold the pair elements.
+### Usage
+#### Creating a Pair
+```c
+int firstElement = 42;
+char secondElement = 'A';
+Pair* myPair = makePair(&firstElement, &secondElement);
+```
 
-### 實作
-以下為pair使用範例
+#### Freeing a Pair
+```c
+freePair(&myPair);
 ```
+
+#### Swapping Two Pairs
+```c
+Pair* anotherPair = makePair(&anotherFirstElement, &anotherSecondElement);
+swapPair(myPair, anotherPair);
 ```
+
+#### Getting the First and Second Elements
+```c
+const void* firstElementPtr = getFirst(myPair);
+const void* secondElementPtr = getSecond(myPair);
+```
+
+#### Checking if a Pair is Empty
+```c
+if (isPairEmpty(myPair)) {
+    // Pair is empty
+}
+```
+
 
 
