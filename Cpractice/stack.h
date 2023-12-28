@@ -27,7 +27,7 @@ bool pushStack(Stack* stack, void* dataInPtr);
 void* popStack(Stack* stack);
 void* topStack(Stack* stack);
 
-bool isEmptyStack(Stack* stack);
-int	sizeOfStack(Stack* stack);
+bool isEmptyStack(const Stack * stack);
+int	sizeOfStack(const Stack * stack);
 
 #endif // !STACK_H

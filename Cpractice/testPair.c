@@ -31,11 +31,11 @@ void TestFreePair(CuTest* tc)
 void TestSwapPair(CuTest* tc)
 {
     int firstValueA = 42;
-    int secondValueA = 99;
+    char secondValueA = 'a';
     Pair* pairA = makePair(&firstValueA, &secondValueA);
 
     int firstValueB = 11;
-    int secondValueB = 88;
+    char secondValueB = 'b';
     Pair* pairB = makePair(&firstValueB, &secondValueB);
 
     swapPair(pairA, pairB);

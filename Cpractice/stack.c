@@ -107,7 +107,7 @@ void* topStack(Stack* stack)
 	Returns:
 		- true if the stack is empty or NULL, false otherwise.
 */
-bool isEmptyStack(Stack* stack)
+bool isEmptyStack(const Stack * stack)
 {
 	return  (stack == NULL || stack->size == 0);
 }
@@ -122,7 +122,7 @@ bool isEmptyStack(Stack* stack)
 	Returns:
 		- The current size of the stack, or 0 if the stack is NULL.
 */
-int sizeOfStack(Stack* stack)
+int sizeOfStack(const Stack * stack)
 {
 	return (stack != NULL ? stack->size : 0);
 }

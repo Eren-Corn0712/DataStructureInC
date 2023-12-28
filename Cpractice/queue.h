@@ -31,8 +31,8 @@ bool dequeue(Queue* queue, void** itemPtr);
 bool queueFront(Queue* queue, void** itemPtr);
 bool queueRear(Queue* queue, void** itemPtr);
 
-bool fullQueue(Queue* queue);
-bool isEmptyQueue(Queue* queue);
-int sizeOfQueue(Queue* queue);
+bool fullQueue(const Queue * queue);
+bool isEmptyQueue(const Queue * queue);
+int sizeOfQueue(const Queue * queue);
 
 #endif // !QUEUE_H

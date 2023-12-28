@@ -145,7 +145,7 @@ bool queueRear(Queue* queue, void** itemPtr)
 	return true;
 }
 
-bool fullQueue(Queue* queue)
+bool fullQueue(const Queue * queue)
 {
 	QueueNode* temp = (QueueNode*)malloc(sizeof(QueueNode));
 	if (temp) {
@@ -164,7 +164,7 @@ bool fullQueue(Queue* queue)
 	Returns:
 		- true if the queue is empty (NULL or size is 0), false otherwise.
 */
-bool isEmptyQueue(Queue* queue)
+bool isEmptyQueue(const Queue * queue)
 {
 	return (queue == NULL || queue->size == 0);
 }
@@ -178,7 +178,7 @@ bool isEmptyQueue(Queue* queue)
 	Returns:
 		- The size of the queue. Returns 0 if the queue is NULL.
 */
-int sizeOfQueue(Queue* queue)
+int sizeOfQueue(const Queue * queue)
 {
 	return queue ? queue->size : 0;
 }
