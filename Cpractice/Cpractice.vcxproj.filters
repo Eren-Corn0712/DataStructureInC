@@ -36,6 +36,18 @@
     <ClInclude Include="testPair.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="tensor.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="allocator.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="storage.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="queue.c">
@@ -60,6 +72,15 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="testPair.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="tensor.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="allocator.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

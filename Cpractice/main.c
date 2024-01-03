@@ -6,6 +6,8 @@
 #include"testPair.h"
 #include"cuTest.h"
 
+#include "tensor.h"
+
 void RunAllTests(void) {
     // Create Suite
     CuString* output = CuStringNew();
@@ -26,6 +28,7 @@ void RunAllTests(void) {
 }
 
 int main() {
-    RunAllTests();
+    long shape[] = {2, 5, 5};
+    Tensor* tensor = createTensor(shape, 3);
 	return 0;
 }

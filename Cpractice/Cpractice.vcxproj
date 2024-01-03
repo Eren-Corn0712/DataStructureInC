@@ -19,23 +19,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="allocator.h" />
     <ClInclude Include="cuTest.h" />
     <ClInclude Include="pair.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="storage.h" />
+    <ClInclude Include="tensor.h" />
     <ClInclude Include="testPair.h" />
     <ClInclude Include="testQueue.h" />
     <ClInclude Include="testStack.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="allocator.c" />
     <ClCompile Include="cuTest.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="pair.c" />
     <ClCompile Include="queue.c" />
     <ClCompile Include="stack.c" />
+    <ClCompile Include="tensor.c" />
     <ClCompile Include="testPair.c" />
     <ClCompile Include="testQueue.c" />
     <ClCompile Include="testStack.c" />
+    <ClCompile Include="utils.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -39,7 +39,6 @@ void TestSwapPair(CuTest* tc)
     Pair* pairB = makePair(&firstValueB, &secondValueB);
 
     swapPair(pairA, pairB);
-
     CuAssertPtrEquals(tc, &firstValueB, getFirst(pairA));
     CuAssertPtrEquals(tc, &secondValueB, getSecond(pairA));
     CuAssertPtrEquals(tc, &firstValueA, getFirst(pairB));
