@@ -7,7 +7,7 @@
 #include"cuTest.h"
 
 #include "tensor.h"
-
+#include "nn.h"
 void RunAllTests(void) {
     // Create Suite
     CuString* output = CuStringNew();
@@ -28,7 +28,12 @@ void RunAllTests(void) {
 }
 
 int main() {
-    long shape[] = {2, 5, 5};
-    Tensor* tensor = createTensor(shape, 3);
-	return 0;
+    Tensor* input = createTensor((int[]) {10}, 1, 1.0);
+
+    Linear* ll = createLinear(10, 20, true);
+
+    Tensor* output = ll->forward(ll, input);
+
+    printf("Debug");
+    return 0;
 }
