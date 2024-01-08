@@ -6,21 +6,33 @@ Tensor* createTensor(int* shape, int dim, double val)
 {
 	Tensor* tensor = (Tensor*)malloc(sizeof(Tensor));
 	if (tensor) {
-		tensor->self = tensor;
-		tensor->shape = shape;
+        tensor->shape = (int*)malloc(dim * sizeof(int));
+        if (tensor->shape != NULL) {
+            for (int i = 0; i < dim; i++) {
+                tensor->shape[i] = shape[i];
+            }
+        }
+
 		tensor->dim = dim;
 		tensor->stride = computeStride(shape, dim);
         tensor->size = computeSize(shape, dim);
-        tensor->data = (double*)malloc(sizeof(double) * tensor->size);
-        for (int i = 0; i < tensor->size; i++) {
-            tensor->data[i] = val;
-        }
+
+        tensor->data = (double*)malloc(tensor->size * sizeof(double));
         
+        if (tensor->data != NULL) {
+            for (int i = 0; i < tensor->size; i++) {
+                tensor->data[i] = val;
+            }
+        }
+
         // method
         tensor->getSize = getSize;
+        tensor->getDim = getDim;
+
         tensor->_index = _index;
         tensor->set = set;
         tensor->get = get;
+        tensor->print = printTensor;
 	}
 	return tensor;
 }
@@ -69,7 +81,7 @@ int computeSize(int* shape, int dim)
 
 Tensor* getSelf(const Tensor* self)
 {
-    return self->self;
+    return self;
 }
 
 int getSize(const Tensor * self)
@@ -84,9 +96,15 @@ int getDim(const Tensor* self)
 
 int _index(Tensor* self, int* index)
 {   
-    
+    for (int i = 0; i < self->dim; i++) {
+        if (index[i] < 0 || index[i] >= self->shape[i]) {
+            printf("Index out of range!\n");
+            return -1;
+        }
+    }
+
     int position = 0;
-    for (int k = 0; k < self->dim - 1; k++) {
+    for (int k = 0; k < self->dim; k++) {
         position += (self->stride[k] * index[k]);
     }
     return position;
@@ -102,5 +120,14 @@ void set(Tensor* self, int* index, double val)
 double get(Tensor* self, int* index)
 {
     int pos = self->_index(self, index);
-    return self->data[pos];
+    double val = self->data[pos];
+    return val;
+}
+
+void printTensor(Tensor* self)
+{
+    for (int i = 0; i < self->size; i++) {
+        printf("Tensor[%d] = %2.5lf\n", i, self->data[i]);
+    }
+    printf("\n\n");
 }

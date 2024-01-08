@@ -28,12 +28,13 @@ void RunAllTests(void) {
 }
 
 int main() {
-    Tensor* input = createTensor((int[]) {10}, 1, 1.0);
+    int shape[] = { 10 };
+    Tensor* input = createTensor(shape, 1, 1.0);
 
     Linear* ll = createLinear(10, 20, true);
 
     Tensor* output = ll->forward(ll, input);
 
-    printf("Debug");
+    output->print(output);
     return 0;
 }

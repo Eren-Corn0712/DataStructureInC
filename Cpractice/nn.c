@@ -9,18 +9,14 @@ Linear* createLinear(int in_features, int out_features, bool bias)
 	if (linear) {
 		linear->in_features = in_features;
 		linear->out_features = out_features;
-		linear->weight = createTensor(
-			(int[]) {out_features, in_features},
-			2,
-			1.0
-		);
+		
+		int weightShape[] = { out_features, in_features };
+		linear->weight = createTensor(weightShape, 2, 1.0);
+
+		int biasShape[] = { out_features };
 		linear->bias = NULL;
 		if (bias) {
-			linear->bias = createTensor(
-				(int[]) {out_features},
-				1,
-				1.0
-			);
+			linear->bias = createTensor(biasShape, 1, 1.0);
 		}
 
 		linear->forward = forwardLinear;
@@ -31,26 +27,22 @@ Linear* createLinear(int in_features, int out_features, bool bias)
 
 Tensor* forwardLinear(Linear* self, Tensor* input)
 {
-	Tensor* output = createTensor(
-		(int[]) {self->out_features},
-		1,
-		0.0
-	);
+	Tensor* output = createTensor((int[]) { self->out_features }, 1, 0.0);
+	Tensor* weight = self->weight;
+	Tensor* bias = self->bias;
+	weight->print(weight);
+	bias->print(bias);
 
 	for (int i = 0; i < self->out_features; i++) {
-		double out = 0.0;
+		double sumValue = 0.0;
 		for (int j = 0; j < self->in_features; j++) {
-			double x = input->get(input, (int[]) { j });
-			double y = self->weight->get(self->weight, (int[]) {i, j});
-			out += (x * y);
+			int x_index[] = { j };
+			int w_index[] = { i, j };
+			double x = input->get(input, x_index);
+			double w = weight->get(weight, w_index);
+			sumValue += w * x;
 		}
-		// Add bias if available
-		if (self->bias != NULL) {
-			out += self->bias->get(self->bias, (int[]) { i });
-		}
-		printf("out = %d\n", out);
-		output->set(output, (int[]) {i}, out);
+		output->set(output, (int[]) { i }, sumValue);
 	}
-
 	return output;
 }

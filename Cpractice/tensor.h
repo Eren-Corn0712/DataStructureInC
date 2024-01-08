@@ -11,9 +11,6 @@ typedef struct tensor Tensor;
 
 struct tensor
 {
-    // pointer to myself
-    Tensor* self;
-
     // size and shape infomation
     int* shape;
     int* stride;
@@ -25,25 +22,26 @@ struct tensor
 
     // Method 
     int (*getSize)(Tensor*);
-    int (*_index)(Tensor*, int*);
+    int (*getDim)(Tensor*);
 
+    int (*_index)(Tensor*, int*);
     int (*set)(Tensor*, int*, double);
     int (*get)(Tensor*, int*);
+    void (*print)(Tensor*);
 };
 
 Tensor* createTensor(int* shape, int dim, double val);
 
-
 int* computeStride(int* shape, int size);
 int computeSize(int* shape, int dim);
-
-
 
 // access attribute method
 Tensor* getSelf(const Tensor* self);
 int getSize(const Tensor* self);
 int getDim(const Tensor* self);
-static int _index(Tensor* self, int* index);
+
+int _index(Tensor* self, int* index);
 void set(Tensor* self, int* index, double val);
 double get(Tensor* self, int* index);
+void printTensor(Tensor* self);
 #endif // !TENSOR_H
