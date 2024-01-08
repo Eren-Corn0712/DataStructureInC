@@ -3,24 +3,33 @@
 #define NN_H
 #include "tensor.h"
 // Forward declaration
+typedef struct nn NN;
+typedef struct layer Layer;
 
-typedef struct linear Linear;
 
-
-
-struct linear
+struct nn
 {
-	int in_features;
-	int out_features;
-	Tensor* weight;
-	Tensor* bias;
-	Tensor* (*forward)(Linear*, Tensor*);
-	void (*backward)(Tensor*);
+	int numsLayer;
+	Layer* first;
+	Layer* last;
+
+	bool (*addLayer)(NN*, void*);
+	Tensor* (*nnForward)(NN*, Tensor*);
 };
 
+struct layer
+{
+	void* layerPtr;
+	Layer* next;
+};
 
-Linear* createLinear(int in_features, int out_features, bool bias);
+NN* createNN();
+Layer* createLayer(void* m);
 
-Tensor* forwardLinear(Linear* self, Tensor* input);
+// add layer
+bool addLayer(NN* nn, void* layerIn);
+
+// forward method
+Tensor* forward(NN*, Tensor*);
 
 #endif // !NN_H

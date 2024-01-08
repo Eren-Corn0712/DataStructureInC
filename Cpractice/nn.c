@@ -1,48 +1,56 @@
 #include "nn.h"
-#include "tensor.h"
 #include <stdlib.h>
-
-
-Linear* createLinear(int in_features, int out_features, bool bias)
+#include "linear.h"
+NN* createNN()
 {
-	Linear* linear = (Linear*)malloc(sizeof(Linear));
-	if (linear) {
-		linear->in_features = in_features;
-		linear->out_features = out_features;
-		
-		int weightShape[] = { out_features, in_features };
-		linear->weight = createTensor(weightShape, 2, 1.0);
-
-		int biasShape[] = { out_features };
-		linear->bias = NULL;
-		if (bias) {
-			linear->bias = createTensor(biasShape, 1, 1.0);
-		}
-
-		linear->forward = forwardLinear;
-		linear->backward = NULL;
+	NN* nn = (NN*)malloc(sizeof(NN));
+	if (nn) {
+		nn->numsLayer = 0;
+		nn->first = NULL;
+		nn->last = NULL;
+		nn->addLayer = addLayer;
+		nn->nnForward = forward;
 	}
-	return linear;
+	return nn;
 }
 
-Tensor* forwardLinear(Linear* self, Tensor* input)
+Layer* createLayer(void* m)
 {
-	Tensor* output = createTensor((int[]) { self->out_features }, 1, 0.0);
-	Tensor* weight = self->weight;
-	Tensor* bias = self->bias;
-	weight->print(weight);
-	bias->print(bias);
+	Layer* layer = (Layer*)malloc(sizeof(Layer));
+	if (layer) {
+		layer->layerPtr = m;
+		layer->next = NULL;
+	}
+	return layer;
+}
 
-	for (int i = 0; i < self->out_features; i++) {
-		double sumValue = 0.0;
-		for (int j = 0; j < self->in_features; j++) {
-			int x_index[] = { j };
-			int w_index[] = { i, j };
-			double x = input->get(input, x_index);
-			double w = weight->get(weight, w_index);
-			sumValue += w * x;
-		}
-		output->set(output, (int[]) { i }, sumValue);
+bool addLayer(NN* nn, void* layerIn)
+{
+	Layer* layer = createLayer(layerIn);
+	if (!nn || !layer) {
+		return false;
+	}
+
+	if (nn->numsLayer == 0) {
+		nn->first = layer;
+	}
+	else {
+		nn->last->next = layer;
+	}
+	nn->last = layer;
+	(nn->numsLayer)++;
+	return true;
+}
+
+Tensor* forward(NN* nn, Tensor* input)
+{
+	Layer* currLayer = nn->first;
+	Tensor* output = NULL;
+	while (currLayer != NULL) {
+		Linear* linear = (Linear*)(currLayer->layerPtr);
+		output = linear->forward(linear, input);
+		input = output;
+		currLayer = currLayer->next;
 	}
 	return output;
 }

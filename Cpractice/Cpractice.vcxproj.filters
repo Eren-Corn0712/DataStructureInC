@@ -45,6 +45,9 @@
     <ClInclude Include="nn.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="linear.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="queue.c">
@@ -75,6 +78,9 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="tensor.c">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="linear.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="nn.c">

@@ -28,10 +28,11 @@ Tensor* createTensor(int* shape, int dim, double val)
         // method
         tensor->getSize = getSize;
         tensor->getDim = getDim;
+        tensor->getShape = getShape;
 
         tensor->_index = _index;
-        tensor->set = set;
-        tensor->get = get;
+        tensor->setVal = setVal;
+        tensor->getVal = getVal;
         tensor->print = printTensor;
 	}
 	return tensor;
@@ -39,26 +40,16 @@ Tensor* createTensor(int* shape, int dim, double val)
 
 int* computeStride(const int* shape, int size) {
     // Check for invalid input
-    if (shape == NULL || size == 0) {
-        return NULL;
-    }
+    if (shape == NULL || size == 0) return NULL;
 
     int* stride = (int*)malloc(sizeof(int) * size);
 
     // Check for memory allocation failure
-    if (stride == NULL) {
-        return NULL;
-    }
-
-
+    if (stride == NULL) return NULL;
+ 
     for (int i = size - 1; i >= 0; i--)
     {
-        if (i == size - 1) {
-            stride[i] = 1;
-        }
-        else {
-            stride[i] = shape[i + 1] * stride[i + 1];
-        }
+        stride[i] = (i == size - 1) ? 1 :shape[i + 1] * stride[i + 1];
     }
     return stride;
 }
@@ -66,9 +57,7 @@ int* computeStride(const int* shape, int size) {
 
 int computeSize(int* shape, int dim)
 {
-    if (shape == NULL) {
-        return 0;
-    }
+    if (shape == NULL) return 0;
 
     int size = 1;
     for (int i = 0; i < dim; i++) {
@@ -94,7 +83,12 @@ int getDim(const Tensor* self)
     return self->dim;
 }
 
-int _index(Tensor* self, int* index)
+int* getShape(const Tensor* self)
+{
+    return self->shape;
+}
+
+int _index(Tensor* self, const int * index)
 {   
     for (int i = 0; i < self->dim; i++) {
         if (index[i] < 0 || index[i] >= self->shape[i]) {
@@ -111,16 +105,17 @@ int _index(Tensor* self, int* index)
 }
 
 
-void set(Tensor* self, int* index, double val)
+void setVal(Tensor* self, const int * index, double val)
 {
     int pos = self->_index(self, index);
     self->data[pos] = val;
 }
 
-double get(Tensor* self, int* index)
+double getVal(Tensor* self, const int * index)
 {
     int pos = self->_index(self, index);
-    double val = self->data[pos];
+    double val = 0.0;
+    val = self->data[pos];
     return val;
 }
 

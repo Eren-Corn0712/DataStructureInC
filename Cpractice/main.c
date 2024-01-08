@@ -7,6 +7,7 @@
 #include"cuTest.h"
 
 #include "tensor.h"
+#include "linear.h"
 #include "nn.h"
 void RunAllTests(void) {
     // Create Suite
@@ -28,13 +29,25 @@ void RunAllTests(void) {
 }
 
 int main() {
+    // create vector
     int shape[] = { 10 };
     Tensor* input = createTensor(shape, 1, 1.0);
+    
+    NN* nn = createNN();
 
-    Linear* ll = createLinear(10, 20, true);
+    nn->addLayer(nn, createLinear(10, 20, false));
+    nn->addLayer(nn, createLinear(20, 30, false));
+    nn->addLayer(nn, createLinear(30, 2, false));
 
-    Tensor* output = ll->forward(ll, input);
-
+    Tensor* output = nn->nnForward(nn, input);
     output->print(output);
+
+    int dim = output->dim;
+    int* output_shape = output->shape;
+    for (int i = 0; i < dim; i++)
+    {
+        printf("Shape = %d", output_shape[i]);
+    }
+
     return 0;
 }

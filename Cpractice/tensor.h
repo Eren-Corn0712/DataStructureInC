@@ -23,10 +23,12 @@ struct tensor
     // Method 
     int (*getSize)(Tensor*);
     int (*getDim)(Tensor*);
+    int* (*getShape)(Tensor*);
 
     int (*_index)(Tensor*, int*);
-    int (*set)(Tensor*, int*, double);
-    int (*get)(Tensor*, int*);
+    double (*setVal)(Tensor*, int*, double);
+    double (*getVal)(Tensor*, int*);
+
     void (*print)(Tensor*);
 };
 
@@ -39,9 +41,10 @@ int computeSize(int* shape, int dim);
 Tensor* getSelf(const Tensor* self);
 int getSize(const Tensor* self);
 int getDim(const Tensor* self);
+int* getShape(const Tensor* self);
 
-int _index(Tensor* self, int* index);
-void set(Tensor* self, int* index, double val);
-double get(Tensor* self, int* index);
+int _index(Tensor* self, const int * index);
+void setVal(Tensor* self, const int * index, double val);
+double getVal(Tensor* self, const int * index);
 void printTensor(Tensor* self);
 #endif // !TENSOR_H
